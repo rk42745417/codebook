@@ -6,6 +6,6 @@ ll chre(ll x1, ll m1, ll x2, ll m2){
     ll p = get<1>(extgcd(m1, m2));
     ll lcm = m1 * m2 * g;
     ll res = p * (x2 - x1) * m1 + x1;
-    //might overflow, be cautious
+    //might overflow for above two lines, be cautious
     return (res % lcm + lcm) % lcm;
 }
