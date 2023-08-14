@@ -1,0 +1,24 @@
+// If undo is not needed, remove st, time() and rollback()
+// int t = dsu.tim(); ...; uf.rollback(t);
+struct dsu_undo {
+    vector<int> e;
+    vector<pair<int, int>> st;
+    dsu_undo(int n) : e(n, -1) {}
+    int size(int x) { return -e[find(x)]; }
+    int find(int x) { return e[x] < 0 ? x : find(e[x]); }
+    int time() { return st.size(); }
+    void rollback(int t) {
+        for (int i = time(); i-- > t;)
+            e[st[i].first] = st[i].second;
+        st.resize(t);
+    }
+    bool join(int a, int b) {
+        a = find(a), b = find(b);
+        if (a == b) return false;
+        if (e[a] > e[b]) swap(a, b);
+        st.push_back({a, e[a]});
+        st.push_back({b, e[b]});
+        e[a] += e[b]; e[b] = a;
+        return true;
+    }
+};
