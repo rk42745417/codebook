@@ -3,10 +3,6 @@ syn on
 filetype plugin indent on
 colo desert
 nnoremap <C-a> ggVG
-vnoremap <C-c> "+y
-inoremap <C-v> <ESC>"+pa
-nnoremap <C-s> :w<CR>
-inoremap <C-s> <ESC>:w<CR>a
 inoremap {<CR> {<CR>}<Esc>O
 nnoremap <F8> :w <bar> !g++ -std=c++17 % -o %:r -O2<CR>
 nnoremap <F9> :w <bar> !g++ -std=c++17 % -o %:r -Wall -Wextra -Wconversion -Wshadow -Wfatal-errors -fsanitize=undefined,address -g -Dgenshin <CR>

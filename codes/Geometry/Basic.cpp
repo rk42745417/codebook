@@ -14,10 +14,10 @@ struct point {
     point operator/(ld r) const {
         return point(x / r, y / r);
     }
-    bool operator<(const point &a, const point &b) const {
-        retrun a.x == b.x ? a.x < b.x : a.y < b.y; }
+    bool operator<(const point &b) const {
+        return x == b.x ? x < b.x : y < b.y; }
     ld dis2() { return x * x + y * y; }
-    ld dis() { return sqrt(dis()); }
+    ld dis() { return sqrt(dis2()); }
     point perp() { return point(-y, x); }
     point norm() {
         ld d = dis();
@@ -28,8 +28,12 @@ ld cross(const point &a, const point &b, const point &c) {
     auto x = b - a, y = c - a;
     return x.x * y.y - y.x * x.y;
 }
+ld dot(const point &a, const point &b, const point &c) {
+    auto x = b - a, y = c - a;
+    return x.x * y.x + x.y * y.y;
+}
 ld area(const point &a, const point &b, const point &c) {
-    return ld(abs(cross(a, b, c))) / 2;
+    return ld(cross(a, b, c)) / 2;
 }
 static inline bool eq(ld a, ld b) { return abs(a - b) < EPS; }
 int sgn(ld v) {
@@ -42,7 +46,7 @@ bool collinearity(point a, point b, point c) {
     return ori(a, b, c) == 0;
 }
 bool btw(point p, point a, point b) {
-    return collinearity(p, a, b) && sgn(dot(a - p, b - p)) <= 0;
+    return collinearity(p, a, b) && sgn(dot(p, a, b)) <= 0;
 }
 point projection(point p1, point p2, point p3) {
     return (p2 - p1) * dot(p1, p2, p3) / (p2 - p1).dis2();
