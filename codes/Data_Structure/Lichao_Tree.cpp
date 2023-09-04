@@ -16,7 +16,7 @@ struct lichao { // maxn: range
         else
             insert(l, m, id << 1, x);
     } // change to > if query min
-    void insert(ll a, ll b) { insert(0, N, 1, line(a, b)); }
+    void insert(ll a, ll b) { insert(0, maxn, 1, line(a, b)); }
     ll que(int l, int r, int id, int p) {
         if(l == r - 1)
             return arr[id](p);
@@ -25,6 +25,6 @@ struct lichao { // maxn: range
             return max(arr[id](p), que(l, m, id << 1, p));
         return max(arr[id](p), que(m, r, id << 1 | 1, p));
     } // chnage to min if query min
-    ll que(int p) { return que(0, N, 1, p); }
+    ll que(int p) { return que(0, maxn, 1, p); }
 } tree;
 
