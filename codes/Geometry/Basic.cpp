@@ -15,7 +15,7 @@ struct point {
         return point(x / r, y / r);
     }
     bool operator<(const point &b) const {
-        return x == b.x ? x < b.x : y < b.y; }
+        return x == b.x ? y < b.y : x < b.x; }
     ld dis2() { return x * x + y * y; }
     ld dis() { return sqrt(dis2()); }
     point perp() { return point(-y, x); }
