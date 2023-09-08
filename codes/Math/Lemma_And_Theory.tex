@@ -1,5 +1,13 @@
 \subsubsection{Pick's Theorem}
 For a simple polygon, its area $A$ can be written as $A = i + \frac b2 - 1$ in which $i$ is the number of points that are strictly interior to the polygon and $b$ is the number of points that are on the polygon's boundary.
 \subsubsection{Euler's Planar Graph Theorem}
-F: number of regions bounded by edges. \\
+\(F\): number of regions bounded by edges. \\
 \(V - E + F = C + 1, E \le 3V - 6\)
+\subsubsection{Modular inversion recurrence}
+For some prime \(p\),
+\[
+inv_i = \begin{cases}
+    1 & i = 1 \\
+    p - \lfloor \frac{p}{i} \rfloor \times inv_{(p \mod i)} & 1 < i < p
+\end{cases}
+\]
