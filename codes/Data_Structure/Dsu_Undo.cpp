@@ -1,4 +1,5 @@
 // If undo is not needed, remove st, time() and rollback()
+// e stands for size (roots) and parent
 // int t = dsu.tim(); ...; uf.rollback(t);
 struct dsu_undo {
     vector<int> e;

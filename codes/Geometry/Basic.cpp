@@ -1,6 +1,6 @@
 struct point {
     ld x, y;
-    point() { }
+    point(): x(0), y(0) { }
     point(ld a, ld b): x(a), y(b) { }
     point operator-(const point &b) const {
         return point(x - b.x, y - b.y);
@@ -14,9 +14,10 @@ struct point {
     point operator/(ld r) const {
         return point(x / r, y / r);
     }
+    point operator-() const { return point(-x, -y); }
     bool operator<(const point &b) const {
         return x == b.x ? y < b.y : x < b.x; }
-    ld dis2() { return x * x + y * y; }
+    ld dis2() const { return x * x + y * y; }
     ld dis() { return sqrt(dis2()); }
     point perp() { return point(-y, x); }
     point norm() {
@@ -50,6 +51,24 @@ bool btw(point p, point a, point b) {
 }
 point projection(point p1, point p2, point p3) {
     return (p2 - p1) * dot(p1, p2, p3) / (p2 - p1).dis2();
+}
+int quad(point a) {
+    if (a.x == 0 && a.y == 0)
+        return -1;
+    if (a.x > 0)
+        return a.y >= 0 ? 0 : 3;
+    if (a.x < 0)
+        return a.y > 0 ? 1 : 2;
+    return a.y > 0 ? 1 : 3;
+}
+bool cmp_by_polar(const point &a, const point &b) {
+    // start from positive x-axis
+    // Undefined if a or b is the origin
+    if (quad(a) != quad(b))
+        return quad(a) < quad(b);
+    if (ori(point(), a, b) == 0)
+        return a.dis2() < b.dis2();
+    return ori(point(), a, b) > 0;
 }
 using Line = pair<point, point>;
 bool seg_intersect(Line a, Line b) {
