@@ -5,10 +5,10 @@ namespace bridge_cc {
     void dfs(int u, int p, const vector<vector<pair<int, int>>> &edge, vector<int> &pa) {
         tim[u] = low[u] = t++;
         st.push(u);
-        for(const auto &[v, id] : edge[u]) {
-            if(id == p)
+        for (const auto &[v, id] : edge[u]) {
+            if (id == p)
                 continue;
-            if(tim[v])
+            if (tim[v])
                 low[u] = min(low[u], tim[v]);
             else {
                 dfs(v, id, edge, pa);
@@ -17,7 +17,7 @@ namespace bridge_cc {
                     do {
                         pa[x = st.top()] = bcc_id;
                         st.pop();
-                    } while(x != v);
+                    } while (x != v);
                     bcc_id++;
                 }
                 else
@@ -32,10 +32,10 @@ namespace bridge_cc {
         t = bcc_id = 1;
         vector<int> pa(n);
 
-        for(int i = 0; i < n; i++) {
-            if(!tim[i]) {
+        for (int i = 0; i < n; i++) {
+            if (!tim[i]) {
                 dfs(i, -1, edge, pa);
-                while(!st.empty()) {
+                while (!st.empty()) {
                     pa[st.top()] = bcc_id;
                     st.pop();
                 }
