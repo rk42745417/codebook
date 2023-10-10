@@ -53,10 +53,10 @@ point projection(point p1, point p2, point p3) {
     return (p2 - p1) * dot(p1, p2, p3) / (p2 - p1).dis2();
 }
 int quad(point a) {
-    if (a.x == 0 && a.y == 0)
+    if (abs(a.x) < EPS && abs(a.y) < EPS)
         return -1;
     if (a.x > 0)
-        return a.y >= 0 ? 0 : 3;
+        return a.y > 0 || abs(a.y) < EPS ? 0 : 3;
     if (a.x < 0)
         return a.y > 0 ? 1 : 2;
     return a.y > 0 ? 1 : 3;
