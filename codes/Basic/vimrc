@@ -2,7 +2,6 @@ set nu rnu is ls=2 hls ts=4 sw=4 et sts=4 ai bs=2 et sc acd mouse=a encoding=utf
 syn on
 filetype plugin indent on
 colo desert
-nnoremap <C-a> ggVG
 inoremap {<CR> {<CR>}<Esc>O
 inoremap jj <Esc>
 nnoremap <F8> :w <bar> !g++ -std=c++17 % -o %:r -O2<CR>
