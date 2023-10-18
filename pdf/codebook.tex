@@ -101,28 +101,64 @@ literate={\ \ }{{\ }}1
 \tableofcontents
 \vspace{-1em}
 
+\lstdefinelanguage{vim}
+{
+    % list of keywords
+    morekeywords={
+        set, se,
+        colo, syn,
+        let,
+        map, nmap, inoremap,
+        filetype,
+        indent,
+        on, off,
+        autocmd,
+        Plugin,
+        call,
+        ca,
+    },
+    morecomment=[l]{"}, % l is for line comment
+    morestring=[b]' % defines that strings are enclosed in double quotes
+}
+\lstdefinelanguage{bash}
+{}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\newcommand{\includecode}[2]{
-  \subsection{#1}
-  \vspace{-0.8em}
-  \lstinputlisting{#2}
-  \vspace{-1.2em}
-}
-
-\newcommand{\includetex}[2]{
-  \subsection{#1}
-  \input{#2}
-  \vspace{-1.2em}
-}
+\newcommand{\HashFile}{}
+\newcommand{\Prefix}{./}
 
 \newcommand{\sectiontitle}[1]{
-  \section{#1}
-  \vspace{-0.5em}
+    \section{#1}
+    \vspace{-0.5em}
+}
+
+\newcommand{\IncludeCode}[3][C++]{
+    \subsection{#2}
+    \vspace{-0.8em}
+    \lstinputlisting[language=#1]{\Prefix#3}
+    \vspace{-1.2em}
+}
+
+\newcommand{\IncludeCpp}[2]{
+    \renewcommand\HashFile{/tmp/codebook-hash/pdf/\Prefix#2.md5}
+    \subsection[#1] {#1
+        \immediate\write18{./hash.sh \Prefix"#2" \HashFile}
+        {\small [\immediate\protect\input{\HashFile}\unskip]}
+    }
+    \vspace{-0.8em}
+    \lstinputlisting{\Prefix#2}
+    \vspace{-1.2em}
+}
+
+\newcommand{\IncludeTex}[2]{
+    \subsection{#1}
+    \input{\Prefix#2}
+    \vspace{-1.2em}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \input{content.tex}
 
