@@ -27,6 +27,10 @@ struct point {
         ld d = dis();
         return *this / d;
     }
+    point rot(double o) const {
+        double c = cos(o), s = sin(o);
+        return point(c * a.x - s * a.y, s * a.x + c * a.y);
+    }
 };
 using ptld = point<ld>;
 using ptll = point<ll>;
