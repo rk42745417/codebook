@@ -7,4 +7,4 @@ inoremap jj <Esc>
 nnoremap <F8> :w <bar> !g++ -std=c++17 % -o %:r -O2<CR>
 nnoremap <F9> :w <bar> !g++ -std=c++17 % -o %:r -Wall -Wextra -Wconversion -Wshadow -Wfatal-errors -fsanitize=undefined,address -g -Dgenshin <CR>
 nnoremap <F10> :!./%:r <CR>
-ca Hash w !cpp -dD -fpreprocessed $1 | tr -d '[:space:]' | md5sum | cut -c-6
+ca Hash w !cpp -dD -P -fpreprocessed \| tr -d '[:space:]' \| md5sum \| cut -c-6
