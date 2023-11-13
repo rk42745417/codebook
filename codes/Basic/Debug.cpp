@@ -1,18 +1,22 @@
 #ifdef genshin
-#define debug(x) cerr << "\e[1;31m" << #x << " = " << (x) << "\e[0m\n"
-#define print(x) _my_debug(#x, begin(x), end(x))
-template<typename T, typename T2> ostream& operator<<(ostream &os, const pair<T, T2> &obj) {
-    return os << '{' << obj.first << ',' << obj.second << '}';
+#include <experimental/iterator>
+#define safe cerr<<__PRETTY_FUNCTION__<<" line "<<__LINE__<<" safe\n"
+#define debug(a...) debug_(#a, a)
+#define print(a...) print_(#a, a)
+void debug_(const char *s, auto ...a) {
+    cerr << "\e[1;31m(" << s << ") = (";
+    int f = 0;
+    (..., (cerr << (f++ ? ", " : "") << a));
+    cerr << ")\e[0m\n";
 }
-template<typename T> void _my_debug(const char *s, T l, T r) {
-    cerr << "\e[1;33m" << s << " = [";
-    while (l != r) {
-        cerr << *l;
-        cerr << (++l == r ? ']' : ',');
-    }
-    cerr << "\e[0m\n";
+void print_(const char *s, auto L, auto R) {
+    cerr << "\e[1;33m[ " << s << " ] = [ ";
+    using namespace experimental;
+    copy(L, R, make_ostream_joiner(cerr, ", "));
+    cerr << " ]\e[0m\n";
 }
 #else
-#define debug(x) 48763
-#define print(x) 48763
+#define safe ((void)0)
+#define debug(...) safe
+#define print(...) safe
 #endif

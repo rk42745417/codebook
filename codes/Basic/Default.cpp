@@ -7,7 +7,7 @@ using ld = long double;
 using uint = unsigned int;
 const double EPS  = 1e-8;
 const int INF = 0x3F3F3F3F;
-const ll LINF = 4611686018427387903;
+const ll LINF = 46 * ll(1e17);
 const int MOD = 1e9+7;
 const int maxn = 1e5 + 25;
 
